@@ -18,6 +18,9 @@ Library::~Library() {
 	// TODO Auto-generated destructor stub
 }
 
+/**
+ * Add a object to the array.
+ */
 void Library::add( Medium* medium ) {
 	bool s;
 
@@ -36,10 +39,16 @@ void Library::add( Medium* medium ) {
 	}
 }
 
+/**
+ * Remove a object from the array.
+ */
 void Library::remove( Medium* medium ) {
 	// TODO complete function Library::remove()
 }
 
+/**
+ * Change the state of a object.
+ */
 void Library::changeState( bool state ) {
 	int flag = 0;
 	unsigned int tmpSig = 0;
@@ -65,6 +74,9 @@ void Library::changeState( bool state ) {
 	}
 }
 
+/**
+ * Display a list with all objects of the library.
+ */
 void Library::print() {
 	// TODO replace function with "cout" operation overloading
 	std::cout << "MEDIENBESTAND" << std::endl;
@@ -72,5 +84,14 @@ void Library::print() {
 
 	for( unsigned int i = 0; i < (sizeof(mediumLib)/sizeof(mediumLib[0])) && mediumLib[i] != NULL; i++ ) {
 		mediumLib[i]->print();
+	}
+}
+
+/**
+ * Delete all objects in the array.
+ */
+void Library::destroy() {
+	for( unsigned int i = 0; i < (sizeof(mediumLib)/sizeof(mediumLib[0])) && mediumLib[i] != NULL; i++ ) {
+		delete mediumLib[i];
 	}
 }

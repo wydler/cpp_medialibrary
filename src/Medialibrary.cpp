@@ -7,7 +7,6 @@
 
 #include <iomanip>
 #include <iostream>
-#include <list>
 #include <sstream>
 #include <string>
 #include "Medium.h"
@@ -21,7 +20,7 @@ int main() {
 	char action;
 	Library* lib = new Library();
 
-	while( action != 'q' ) {
+	while( action != 'w' ) {
 		cout << endl;
 		cout << "Bitte Aktion eingeben: ";
 		cin >> action;
@@ -29,18 +28,15 @@ int main() {
 
 		switch( action ) {
 			case 'm': {
-				Medium* m = new Medium();
-				lib->add( m );
+				lib->add( new Medium() );
 				break;
 			}
 			case 'b': {
-				Book* b = new Book();
-				lib->add( b );
+				lib->add( new Book() );
 				break;
 			}
 			case 'v': {
-				Video* v = new Video();
-				lib->add( v );
+				lib->add( new Video() );
 				break;
 			}
 			case 'l': {
@@ -70,6 +66,7 @@ int main() {
 				break;
 			}
 			case 'q': {
+				lib->destroy();
 				delete lib;
 				cout << "[INFO]  Programm wurde beendet!" << endl;
 				break;

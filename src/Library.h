@@ -19,12 +19,12 @@ class Library {
 		Library();
 		virtual ~Library();
 		void add( Medium* );
-		// TODO implement function Library::remove()
 		void remove( Medium* );
 		void changeState( bool );
 		void print();
+		void destroy();
 	private:
-		Medium* mediumLib[10];
+		Medium* mediumLib[3];
 
 };
 
