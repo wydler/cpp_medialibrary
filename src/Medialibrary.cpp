@@ -20,7 +20,7 @@ int main() {
 	char action;
 	Library* lib = new Library();
 
-	while( action != 'w' ) {
+	while( action != 'q' ) {
 		cout << endl;
 		cout << "Bitte Aktion eingeben: ";
 		cin >> action;
