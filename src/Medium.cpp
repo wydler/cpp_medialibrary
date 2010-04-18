@@ -23,6 +23,9 @@ Medium::~Medium() {
 	// TODO Auto-generated destructor stub
 }
 
+/**
+ * Convert the state from boolean into text.
+ */
 std::string Medium::printState() {
 	if( state == false ) {
 		return "vorh.";
@@ -31,6 +34,9 @@ std::string Medium::printState() {
 	}
 }
 
+/**
+ * Print the current object.
+ */
 void Medium::print() {
 	std::cout << " ";
 	std::cout << std::setw(6) << std::right << signature;

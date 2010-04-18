@@ -24,6 +24,9 @@ Book::~Book() {
 	// TODO Auto-generated destructor stub
 }
 
+/**
+ * Print the current object.
+ */
 void Book::print() {
 	std::cout << " ";
 	std::cout << std::setw(6) << std::right << signature;

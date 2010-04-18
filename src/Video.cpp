@@ -24,6 +24,9 @@ Video::~Video() {
 	// TODO Auto-generated destructor stub
 }
 
+/**
+ * Print the current object.
+ */
 void Video::print() {
 	std::cout << " ";
 	std::cout << std::setw(6) << std::right << signature;
