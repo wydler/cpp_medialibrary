@@ -11,6 +11,9 @@
 #include <sstream>
 #include <string>
 
+/**
+ * Input new string.
+ */
 std::string inputTitle() {
 	std::string s;
 	std::cout << "Titel: ";
@@ -20,6 +23,9 @@ std::string inputTitle() {
 	return s;
 }
 
+/**
+ * Input signature and check validity.
+ */
 int inputSignature() {
 	unsigned int signature = 0;
 	std::cout << "Signatur eingeben: ";
@@ -31,6 +37,9 @@ int inputSignature() {
 	return signature;
 }
 
+/**
+ * Input pages and check validity.
+ */
 int inputPages() {
 	unsigned int pages = 0;
 	std::cin.clear();
@@ -45,6 +54,9 @@ int inputPages() {
 	return pages;
 }
 
+/**
+ * Input lenght and check validity.
+ */
 double inputLenght() {
 	double lenght = 0;
 	std::cout << "Spieldauer: ";
