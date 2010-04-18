@@ -24,7 +24,7 @@ class Library {
 		void print();
 		void destroy();
 	private:
-		Medium* mediumLib[3];
+		Medium* mediumLib[100];
 
 };
 
