@@ -17,42 +17,53 @@
 using namespace std;
 
 int main() {
+	// create variable for action
 	char action;
+
+	// create new library
 	Library* lib = new Library();
 
 	while( action != 'q' ) {
+		// input new action
 		cout << endl;
 		cout << "Bitte Aktion eingeben: ";
 		cin >> action;
 		cout << endl;
 
+		// switch to desired action
 		switch( action ) {
+			// create medium
 			case 'm': {
 				lib->add( new Medium() );
 				break;
 			}
+			// create book
 			case 'b': {
 				lib->add( new Book() );
 				break;
 			}
+			// create video
 			case 'v': {
 				lib->add( new Video() );
 				break;
 			}
+			// print library-list
 			case 'l': {
 				lib->print();
 				break;
 			}
+			// borrow a medium
 			case 'e': {
 				lib->changeState( true );
 
 				break;
 			}
+			// return a medium
 			case 'r': {
 				lib->changeState( false );
-
 				break;
 			}
+			// show help
 			case 'h': {
 				cout << "Mögliche Befehle:" << endl;
 				cout << "m - Neues Medium anlegen" << endl;
@@ -65,12 +76,14 @@ int main() {
 				cout << "q - Programm beenden" << endl;
 				break;
 			}
+			// exit program
 			case 'q': {
 				lib->destroy();
 				delete lib;
 				cout << "[INFO]  Programm wurde beendet!" << endl;
 				break;
 			}
+			// default switch
 			default: {
 				cin.clear();
 				cin.ignore( 999, '\n' );
