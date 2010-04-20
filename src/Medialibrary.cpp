@@ -78,7 +78,9 @@ int main() {
 			}
 			// exit program
 			case 'q': {
-				lib->destroy();
+				// first delete the objects in the library
+				lib->deleteAll();
+				// then delete the library
 				delete lib;
 				cout << "[INFO]  Programm wurde beendet!" << endl;
 				break;
