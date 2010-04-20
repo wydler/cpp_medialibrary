@@ -90,8 +90,9 @@ void Library::print() {
 /**
  * Delete all objects in the array.
  */
-void Library::destroy() {
+void Library::deleteAll() {
 	for( unsigned int i = 0; i < (sizeof(mediumLib)/sizeof(mediumLib[0])) && mediumLib[i] != NULL; i++ ) {
 		delete mediumLib[i];
+		mediumLib[i] = NULL;
 	}
 }

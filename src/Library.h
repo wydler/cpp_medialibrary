@@ -22,7 +22,7 @@ class Library {
 		void remove( Medium* );
 		void changeState( bool );
 		void print();
-		void destroy();
+		void deleteAll();
 	private:
 		Medium* mediumLib[100];
 
