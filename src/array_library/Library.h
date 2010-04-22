@@ -21,9 +21,12 @@ class Library {
 		void remove( Medium* );
 		void changeState( bool );
 		void print();
+		void deleteSig( int );
 		void deleteAll();
+		int getSize() { return MAX; };
 	private:
-		Medium* mediumLib[100];
+		static const int MAX = 100;
+		Medium* mediumLib[MAX];
 
 };
 
