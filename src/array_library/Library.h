@@ -21,7 +21,6 @@ class Library {
 		void remove( Medium* );
 		void changeState( bool );
 		void print();
-		void deleteSig( int );
 		void deleteAll();
 		int getSize() { return MAX; };
 	private:
