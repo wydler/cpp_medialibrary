@@ -42,8 +42,16 @@ void Library::add( Medium* medium ) {
 /**
  * Remove a object from the array.
  */
-void Library::remove( Medium* medium ) {
-	// TODO complete function Library::remove()
+void Library::remove() {
+	unsigned int tmpSig = 0;
+	std::cin >> tmpSig;
+
+	for( unsigned int i = 0; i < ( sizeof( mediumLib ) / sizeof( mediumLib[0] ) ); i++ ) {
+		if( mediumLib[i]->getSignature() == tmpSig ) {
+			delete mediumLib[i];
+			mediumLib[i] = NULL;
+		}
+	}
 }
 
 /**

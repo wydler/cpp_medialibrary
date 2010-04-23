@@ -18,7 +18,7 @@ class Library {
 		Library();
 		virtual ~Library();
 		void add( Medium* );
-		void remove( Medium* );
+		void remove();
 		void changeState( bool );
 		void print();
 		void deleteAll();
