@@ -9,6 +9,7 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <stdlib.h>
 
 #include "media/Medium.h"
 #include "media/Book.h"
@@ -54,6 +55,10 @@ int main() {
 				lib->print();
 				break;
 			}
+			// remove medium
+			case 'd': {
+				lib->remove();
+			}
 			// borrow a medium
 			case 'e': {
 				lib->changeState( true );
@@ -72,6 +77,7 @@ int main() {
 				cout << "b - Neues Buch anlegen" << endl;
 				cout << "v - Neues Video anlegen" << endl;
 				cout << "l - Medienliste anzeigen" << endl;
+				cout << "d SIG - Medium mit der Signatur 'SIG' loeschen" << endl;
 				cout << "e SIG - Medium mit der Signatur 'SIG' ausleihen" << endl;
 				cout << "r SIG - Medium mit der Signatur 'SIG' zurückgeben" << endl;
 				cout << "h - Hilfe anzeigen" << endl;
