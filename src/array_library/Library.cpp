@@ -43,14 +43,24 @@ void Library::add( Medium* medium ) {
  * Remove a object from the array.
  */
 void Library::remove() {
+	// TODO output an error!!!
+	int flag = 0;
 	unsigned int tmpSig = 0;
+
 	std::cin >> tmpSig;
 
-	for( unsigned int i = 0; i < ( sizeof( mediumLib ) / sizeof( mediumLib[0] ) ); i++ ) {
+	for( unsigned int i = 0; i < (sizeof(mediumLib)/sizeof(mediumLib[0])) && mediumLib[i] != NULL; i++ ) {
 		if( mediumLib[i]->getSignature() == tmpSig ) {
 			delete mediumLib[i];
-			mediumLib[i] = NULL;
+			mediumLib[i] == NULL;
+			flag++;
 		}
+	}
+
+	if( flag == 0 ) {
+		std::cerr << "[ERROR] Signatur " << tmpSig << " existiert nicht!" << std::endl;
+	} else {
+		std::cout << "[INFO]  " << flag << " Datensätze wurde gelöscht!" << std::endl;
 	}
 }
 
