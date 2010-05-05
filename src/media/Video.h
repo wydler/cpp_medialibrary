@@ -19,6 +19,7 @@ public:
 	void setLenght( double _lenght ) { lenght = _lenght; };
 	virtual void print();
 private:
+	double inputLenght();
 	double lenght;
 };
 

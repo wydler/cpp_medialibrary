@@ -9,7 +9,6 @@
 #include <iostream>
 #include <sstream>
 #include <iomanip>
-#include "../utilities/Utilities.h"
 
 Book::Book() : Medium(0) {
 	std::cout << "Bitte Buchdaten eingeben: Signatur, Seitenzahl und Titel" << std::endl;
@@ -28,14 +27,24 @@ Book::~Book() {
  * Print the current object.
  */
 void Book::print() {
-	std::cout << " ";
-	std::cout << std::setw(6) << std::right << signature;
+	Medium::print();
 	std::cout << "  ";
-	std::cout << std::setw(10) << std::left << type;
-	std::cout << "  ";
-	std::cout << std::setw(15) << std::left << title;
-	std::cout << "  ";
-	std::cout << std::setw(5) << std::left << printState();
-	std::cout << "  ";
-	std::cout << std::left << "Seitenanzahl " << pages << std::endl;
+	std::cout << std::left << "Seitenanzahl " << pages;
+}
+
+/**
+ * Input pages and check validity.
+ */
+int Book::inputPages() {
+	unsigned int pages = 0;
+	std::cin.clear();
+	std::cin.sync();
+	std::cin.ignore();
+	std::cout << "Seitenanzahl: ";
+	while( !(std::cin >> pages) ) {
+		std::cin.clear();
+		std::cin.ignore( 999, '\n' );
+		std::cerr << "[ERROR] Keine gültige Seitenzahl eingegeben!";
+	}
+	return pages;
 }

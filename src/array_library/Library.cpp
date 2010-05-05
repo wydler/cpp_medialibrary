@@ -43,18 +43,20 @@ void Library::add( Medium* medium ) {
  * Remove a object from the array.
  */
 void Library::remove() {
-	// TODO output an error!!!
 	int flag = 0;
 	unsigned int tmpSig = 0;
 
 	std::cin >> tmpSig;
 
-	for( unsigned int i = 0; i < (sizeof(mediumLib)/sizeof(mediumLib[0])) && mediumLib[i] != NULL; i++ ) {
-		if( mediumLib[i]->getSignature() == tmpSig ) {
-			delete mediumLib[i];
-			mediumLib[i] == NULL;
-			flag++;
+	for( unsigned int i = 0; i < (sizeof(mediumLib)/sizeof(mediumLib[0])); i++ ) {
+		if(mediumLib[i] != NULL) {
+			if( mediumLib[i]->getSignature() == tmpSig ) {
+				delete mediumLib[i];
+				mediumLib[i] = NULL;
+				flag++;
+			}
 		}
+
 	}
 
 	if( flag == 0 ) {
@@ -73,22 +75,31 @@ void Library::changeState( bool state ) {
 
 	std::cin >> tmpSig;
 
-	for( unsigned int i = 0; i < (sizeof(mediumLib)/sizeof(mediumLib[0])) && mediumLib[i] != NULL; i++ ) {
-		if( mediumLib[i]->getSignature() == tmpSig ) {
-			if( mediumLib[i]->getState() == !state ) {
-				mediumLib[i]->setState(state);
-				if( mediumLib[i]->getState() == true ) {
-					std::cout << mediumLib[i]->getType() << " " << mediumLib[i]->getSignature() << " wurde als entliehen markiert." << std::endl;
+	for( unsigned int i = 0; i < (sizeof(mediumLib)/sizeof(mediumLib[0])); i++ ) {
+		if(mediumLib[i] != NULL) {
+			if( mediumLib[i]->getSignature() == tmpSig ) {
+				if( mediumLib[i]->getState() == !state ) {
+					mediumLib[i]->setState(state);
+					if( mediumLib[i]->getState() == true ) {
+						std::cout << mediumLib[i]->getType() << " " << mediumLib[i]->getSignature() << " wurde als entliehen markiert." << std::endl;
+					} else {
+						std::cout << mediumLib[i]->getType() << " " << mediumLib[i]->getSignature() << " wurde als vorhanden markiert." << std::endl;
+					}
 				} else {
-					std::cout << mediumLib[i]->getType() << " " << mediumLib[i]->getSignature() << " wurde als vorhanden markiert." << std::endl;
+					if( mediumLib[i]->getState() == true ) {
+						std::cerr << mediumLib[i]->getType() << " " << mediumLib[i]->getSignature() << " ist schon als entliehen markiert." << std::endl;
+					} else {
+						std::cerr << mediumLib[i]->getType() << " " << mediumLib[i]->getSignature() << " ist schon als vorhanden markiert." << std::endl;
+					}
 				}
+				flag++;
 			}
-			flag++;
 		}
 	}
 
 	if( flag == 0 ) {
 		std::cerr << "[ERROR] Signatur " << tmpSig << " existiert nicht!" << std::endl;
+		std::cerr.flush();
 	}
 }
 
@@ -100,8 +111,14 @@ void Library::print() {
 	std::cout << "MEDIENBESTAND" << std::endl;
 	std::cout << "----------------------------------------------------------------------" << std::endl;
 
-	for( unsigned int i = 0; i < (sizeof(mediumLib)/sizeof(mediumLib[0])) && mediumLib[i] != NULL; i++ ) {
-		mediumLib[i]->print();
+	for( unsigned int i = 0; i < (sizeof(mediumLib)/sizeof(mediumLib[0])); i++ ) {
+		if(mediumLib[i] != NULL) {
+			mediumLib[i]->print();
+			std::cout << std::endl;
+		} else {
+			std::cout << "         --- LEER ---" << std::endl;
+		}
+
 	}
 }
 
@@ -109,8 +126,11 @@ void Library::print() {
  * Delete all objects in the array.
  */
 void Library::deleteAll() {
-	for( unsigned int i = 0; i < (sizeof(mediumLib)/sizeof(mediumLib[0])) && mediumLib[i] != NULL; i++ ) {
-		delete mediumLib[i];
-		mediumLib[i] = NULL;
+	for( unsigned int i = 0; i < (sizeof(mediumLib)/sizeof(mediumLib[0])); i++ ) {
+		if(mediumLib[i] != NULL) {
+			delete mediumLib[i];
+			mediumLib[i] = NULL;
+		}
 	}
+	std::cout << "[INFO]  Array wurde komplett gelöscht" << std::endl;
 }

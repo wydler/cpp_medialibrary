@@ -19,6 +19,7 @@ public:
 	void setPages( unsigned int _pages ) { pages = _pages; };
 	virtual void print();
 private:
+	int inputPages();
 	unsigned int pages;
 };
 

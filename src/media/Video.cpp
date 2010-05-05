@@ -9,7 +9,6 @@
 #include <iostream>
 #include <sstream>
 #include <iomanip>
-#include "../utilities/Utilities.h"
 
 Video::Video() : Medium(0) {
 	std::cout << "Bitte Buchdaten eingeben: Signatur, Spieldauer und Titel" << std::endl;
@@ -28,14 +27,21 @@ Video::~Video() {
  * Print the current object.
  */
 void Video::print() {
-	std::cout << " ";
-	std::cout << std::setw(6) << std::right << signature;
+	Medium::print();
 	std::cout << "  ";
-	std::cout << std::setw(10) << std::left << type;
-	std::cout << "  ";
-	std::cout << std::setw(15) << std::left << title;
-	std::cout << "  ";
-	std::cout << std::setw(5) << std::left << printState();
-	std::cout << "  ";
-	std::cout << std::left << "Dauer " << std::setprecision(2) << std::fixed << lenght << " min" << std::endl;
+	std::cout << std::left << "Dauer " << std::setprecision(2) << std::fixed << lenght << " min";
+}
+
+/**
+ * Input lenght and check validity.
+ */
+double Video::inputLenght() {
+	double lenght = 0;
+	std::cout << "Spieldauer: ";
+	while( !(std::cin >> lenght) ) {
+		std::cin.clear();
+		std::cin.ignore( 999, '\n' );
+		std::cerr << "[ERROR] Keine gültige Filmlänge eingegeben!";
+	}
+	return lenght;
 }

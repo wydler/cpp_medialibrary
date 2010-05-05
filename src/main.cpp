@@ -15,7 +15,6 @@
 #include "media/Book.h"
 #include "media/Video.h"
 #include "array_library/Library.h"
-#include "utilities/Utilities.h"
 
 using namespace std;
 
@@ -57,8 +56,7 @@ int main() {
 			}
 			// remove medium
 			case 'd': {
-				/* do NOT use this function */
-				//lib->remove();
+				lib->remove();
 				break;
 			}
 			// borrow a medium
@@ -78,7 +76,7 @@ int main() {
 				cout << "b - Neues Buch anlegen" << endl;
 				cout << "v - Neues Video anlegen" << endl;
 				cout << "l - Medienliste anzeigen" << endl;
-				//cout << "d SIG - Medium mit der Signatur 'SIG' loeschen" << endl;
+				cout << "d SIG - Medium mit der Signatur 'SIG' loeschen" << endl;
 				cout << "e SIG - Medium mit der Signatur 'SIG' ausleihen" << endl;
 				cout << "r SIG - Medium mit der Signatur 'SIG' zurückgeben" << endl;
 				cout << "h - Hilfe anzeigen" << endl;

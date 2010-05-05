@@ -9,7 +9,6 @@
 #include <iostream>
 #include <sstream>
 #include <iomanip>
-#include "../utilities/Utilities.h"
 
 Medium::Medium() {
 	std::cout << "Bitte Mediumdaten eingeben: Signatur und Titel" << std::endl;
@@ -45,5 +44,31 @@ void Medium::print() {
 	std::cout << "  ";
 	std::cout << std::setw(15) << std::left << title;
 	std::cout << "  ";
-	std::cout << std::setw(5) << std::left << printState() << std::endl;
+	std::cout << std::setw(5) << std::left << printState();
+}
+
+/**
+ * Input new string.
+ */
+std::string Medium::inputTitle() {
+	std::string s;
+	std::cout << "Titel: ";
+	std::cin.clear();
+	std::cin.ignore( 999, '\n' );
+	std::getline( std::cin, s );
+	return s;
+}
+
+/**
+ * Input signature and check validity.
+ */
+int Medium::inputSignature() {
+	unsigned int signature = 0;
+	std::cout << "Signatur eingeben: ";
+	while( !(std::cin >> signature) ) {
+		std::cin.clear();
+		std::cin.ignore( 999, '\n' );
+		std::cerr << "[ERROR] Keine gültige Signatur eingegeben!";
+	}
+	return signature;
 }

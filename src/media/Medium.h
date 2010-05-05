@@ -27,6 +27,8 @@ public:
 	std::string printState();
 	virtual void print();
 protected:
+	std::string inputTitle();
+	int inputSignature();
 	unsigned int signature;
 	std::string title;
 	std::string type;
