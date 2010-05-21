@@ -15,6 +15,7 @@
 #include "media/Book.h"
 #include "media/Video.h"
 #include "array_library/Library.h"
+#include "dynamic_library/Container.h"
 
 using namespace std;
 
@@ -22,15 +23,17 @@ int main() {
 	// create variable for action
 	char action;
 
-	// create new library
-	Library* lib = new Library();
+	// create static library
+	//Library* lib = new Library();
+
+	// create dynamic library
+	Container* lib = new Container();
 
 	while( action != 'q' ) {
 		// input new action
 		cout << endl;
 		cout << "Bitte Aktion eingeben: ";
 		cin >> action;
-		cout << endl;
 
 		// switch to desired action
 		switch( action ) {
@@ -40,6 +43,7 @@ int main() {
 				break;
 			}
 			// create book
+			/*
 			case 'b': {
 				lib->add( new Book() );
 				break;
@@ -49,32 +53,100 @@ int main() {
 				lib->add( new Video() );
 				break;
 			}
+			*/
 			// print library-list
 			case 'l': {
-				lib->print();
+				ITEM* item = NULL;
+				lib->begin();
+				while((item = lib->getItem()) != NULL) {
+					cout << item;
+					lib->next();
+				}
 				break;
 			}
 			// remove medium
 			case 'd': {
-				lib->remove();
+				unsigned int sig;
+				cin >> sig;
+
+				ITEM* item = NULL;
+				lib->begin();
+				while((item = lib->getItem()) != NULL) {
+					if(item->getSignature() == sig) {
+						lib->remove();
+						cout << "[INFO]  Datensatz gelöscht" << endl;
+					} else {
+						cerr << "[ERROR] Signatur nicht gefunden!" << endl;
+					}
+					lib->next();
+				}
 				break;
 			}
 			// borrow a medium
 			case 'e': {
-				lib->changeState( true );
+				int flag = 0;
+				unsigned int tmpSig = 0;
+
+				cin >> tmpSig;
+
+				ITEM* item = NULL;
+				lib->begin();
+				while((item = lib->getItem()) != NULL) {
+					if( item->getSignature() == tmpSig ) {
+						if( item->getState() == false ) {
+							item->setState(true);
+							std::cout << "  " << item->getType() << " " << item->getSignature() << " wurde als entliehen markiert." << std::endl;
+						} else {
+							std::cerr << "  " << item->getType() << " " << item->getSignature() << " ist schon als entliehen markiert." << std::endl;
+						}
+						flag++;
+					}
+					lib->next();
+				}
+
+				if( flag == 0 ) {
+					std::cerr << "[ERROR] Signatur " << tmpSig << " existiert nicht!" << std::endl;
+					std::cerr.flush();
+				}
+				//lib->changeState( true );
 				break;
 			}
 			// return a medium
 			case 'r': {
-				lib->changeState( false );
+				int flag = 0;
+				unsigned int tmpSig = 0;
+
+				cin >> tmpSig;
+
+				ITEM* item = NULL;
+				lib->begin();
+				while((item = lib->getItem()) != NULL) {
+					if( item->getSignature() == tmpSig ) {
+						if( item->getState() == true ) {
+							item->setState(false);
+							std::cout << "  " << item->getType() << " " << item->getSignature() << " wurde als vorhanden markiert." << std::endl;
+						} else {
+							std::cerr << "  " << item->getType() << " " << item->getSignature() << " ist schon als vorhanden markiert." << std::endl;
+						}
+						flag++;
+					}
+					lib->next();
+				}
+
+				if( flag == 0 ) {
+					std::cerr << "[ERROR] Signatur " << tmpSig << " existiert nicht!" << std::endl;
+					std::cerr.flush();
+				}
+
+				//lib->changeState( false );
 				break;
 			}
 			// show help
 			case 'h': {
 				cout << "Mögliche Befehle:" << endl;
 				cout << "m - Neues Medium anlegen" << endl;
-				cout << "b - Neues Buch anlegen" << endl;
-				cout << "v - Neues Video anlegen" << endl;
+				//cout << "b - Neues Buch anlegen" << endl;
+				//cout << "v - Neues Video anlegen" << endl;
 				cout << "l - Medienliste anzeigen" << endl;
 				cout << "d SIG - Medium mit der Signatur 'SIG' loeschen" << endl;
 				cout << "e SIG - Medium mit der Signatur 'SIG' ausleihen" << endl;
@@ -86,7 +158,7 @@ int main() {
 			// exit program
 			case 'q': {
 				// first delete the objects in the library
-				lib->deleteAll();
+				//lib->deleteAll();
 				// then delete the library
 				delete lib;
 				cout << "[INFO]  Programm wurde beendet!" << endl;

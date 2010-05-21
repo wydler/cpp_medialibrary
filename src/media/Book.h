@@ -18,6 +18,7 @@ public:
 	unsigned int getPages() { return pages; };
 	void setPages( unsigned int _pages ) { pages = _pages; };
 	virtual void print();
+	friend std::ostream &operator<<(std::ostream &ostr, Book* item);
 private:
 	int inputPages();
 	unsigned int pages;

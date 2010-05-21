@@ -32,6 +32,17 @@ void Book::print() {
 	std::cout << std::left << "Seitenanzahl " << pages;
 }
 
+std::ostream &operator<<(std::ostream &ostr, Book* item)
+{
+	return ostr << " "
+			<< std::setw(6) << std::right << item->getSignature() << " "
+			<< std::setw(10) << std::left << item->getType() << " "
+			<< std::setw(15) << std::left << item->getTitle() << " "
+			<< std::setw(5) << std::left << item->printState() << " "
+			<< std::left << "Seitenanzahl " << item->getPages() << " "
+			<< std::endl;
+}
+
 /**
  * Input pages and check validity.
  */

@@ -26,6 +26,7 @@ public:
 	void setState( bool _state) { state = _state; };
 	std::string printState();
 	virtual void print();
+	friend std::ostream &operator<<(std::ostream &ostr, Medium* item);
 protected:
 	std::string inputTitle();
 	int inputSignature();

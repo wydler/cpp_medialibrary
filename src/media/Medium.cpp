@@ -11,7 +11,7 @@
 #include <iomanip>
 
 Medium::Medium() {
-	std::cout << "Bitte Mediumdaten eingeben: Signatur und Titel" << std::endl;
+	std::cout << "  Bitte Mediumdaten eingeben: Signatur und Titel" << std::endl;
 	signature = inputSignature();
 	title = inputTitle();
 	type = "Medium";
@@ -47,12 +47,22 @@ void Medium::print() {
 	std::cout << std::setw(5) << std::left << printState();
 }
 
+std::ostream &operator<<(std::ostream &ostr, Medium* item)
+{
+	return ostr << " "
+			<< std::setw(6) << std::right << item->getSignature() << " "
+			<< std::setw(10) << std::left << item->getType() << " "
+			<< std::setw(15) << std::left << item->getTitle() << " "
+			<< std::setw(5) << std::left << item->printState() << " "
+			<< std::endl;
+}
+
 /**
  * Input new string.
  */
 std::string Medium::inputTitle() {
 	std::string s;
-	std::cout << "Titel: ";
+	std::cout << "  Titel: ";
 	std::cin.clear();
 	std::cin.ignore( 999, '\n' );
 	std::getline( std::cin, s );
@@ -64,7 +74,7 @@ std::string Medium::inputTitle() {
  */
 int Medium::inputSignature() {
 	unsigned int signature = 0;
-	std::cout << "Signatur eingeben: ";
+	std::cout << "  Signatur eingeben: ";
 	while( !(std::cin >> signature) ) {
 		std::cin.clear();
 		std::cin.ignore( 999, '\n' );
