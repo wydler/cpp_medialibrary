@@ -113,7 +113,7 @@ void Library::print() {
 
 	for( unsigned int i = 0; i < (sizeof(mediumLib)/sizeof(mediumLib[0])); i++ ) {
 		if(mediumLib[i] != NULL) {
-			mediumLib[i]->print();
+			//mediumLib[i]->print();
 			std::cout << std::endl;
 		} else {
 			std::cout << "         --- LEER ---" << std::endl;
