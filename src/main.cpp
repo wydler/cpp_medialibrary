@@ -85,7 +85,7 @@ int main() {
 						if(flag == true) {
 							cout << "  [INFO] Datensatz gelöscht" << endl;
 						} else {
-							cerr << "  [ERROR] Fehler beim löschen des Datensatz!" << endl;
+							cerr << "  [ERROR] Fehler beim löschen des Datensatzes!" << endl;
 						}
 					} else {
 						cerr << "  [ERROR] Signatur nicht gefunden!" << endl;
