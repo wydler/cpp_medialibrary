@@ -25,7 +25,7 @@ public:
 	void setType( std::string _type) { type = _type; };
 	void setState( bool _state) { state = _state; };
 	std::string printState();
-	virtual void print();
+	virtual std::string getDetails() { return " "; };
 	friend std::ostream &operator<<(std::ostream &ostr, Medium* item);
 protected:
 	std::string inputTitle();

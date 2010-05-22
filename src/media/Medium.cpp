@@ -9,9 +9,12 @@
 #include <iostream>
 #include <sstream>
 #include <iomanip>
+#include <limits>
+
+using namespace std;
 
 Medium::Medium() {
-	std::cout << "  Bitte Mediumdaten eingeben: Signatur und Titel" << std::endl;
+	cout << "  Bitte Mediumdaten eingeben: Signatur und Titel" << std::endl;
 	signature = inputSignature();
 	title = inputTitle();
 	type = "Medium";
@@ -33,39 +36,26 @@ std::string Medium::printState() {
 	}
 }
 
-/**
- * Print the current object.
- */
-void Medium::print() {
-	std::cout << " ";
-	std::cout << std::setw(6) << std::right << signature;
-	std::cout << "  ";
-	std::cout << std::setw(10) << std::left << type;
-	std::cout << "  ";
-	std::cout << std::setw(15) << std::left << title;
-	std::cout << "  ";
-	std::cout << std::setw(5) << std::left << printState();
-}
-
 std::ostream &operator<<(std::ostream &ostr, Medium* item)
 {
 	return ostr << " "
-			<< std::setw(6) << std::right << item->getSignature() << " "
-			<< std::setw(10) << std::left << item->getType() << " "
-			<< std::setw(15) << std::left << item->getTitle() << " "
-			<< std::setw(5) << std::left << item->printState() << " "
-			<< std::endl;
+			<< setw(6) << right << item->getSignature() << " "
+			<< setw(10) << left << item->getType() << " "
+			<< setw(10) << left << item->getTitle().substr(0, 10) << " "
+			<< setw(5) << left << item->printState() << " "
+			<< item->getDetails() << " "
+			<< endl;
 }
 
 /**
  * Input new string.
  */
 std::string Medium::inputTitle() {
-	std::string s;
-	std::cout << "  Titel: ";
-	std::cin.clear();
-	std::cin.ignore( 999, '\n' );
-	std::getline( std::cin, s );
+	string s;
+	cout << "  Titel: ";
+	cin.clear();
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	getline(std::cin, s);
 	return s;
 }
 
@@ -73,12 +63,12 @@ std::string Medium::inputTitle() {
  * Input signature and check validity.
  */
 int Medium::inputSignature() {
-	unsigned int signature = 0;
-	std::cout << "  Signatur eingeben: ";
-	while( !(std::cin >> signature) ) {
-		std::cin.clear();
-		std::cin.ignore( 999, '\n' );
-		std::cerr << "[ERROR] Keine gültige Signatur eingegeben!";
+	unsigned int sig = 0;
+	cout << "  Signatur eingeben: ";
+	while( !(cin >> sig) ) {
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cerr << "  [ERROR] Keine gültige Signatur eingegeben!";
 	}
-	return signature;
+	return sig;
 }

@@ -9,9 +9,12 @@
 #include <iostream>
 #include <sstream>
 #include <iomanip>
+#include <limits>
+
+using namespace std;
 
 Video::Video() : Medium(0) {
-	std::cout << "Bitte Buchdaten eingeben: Signatur, Spieldauer und Titel" << std::endl;
+	cout << "  Bitte Buchdaten eingeben: Signatur, Spieldauer und Titel" << std::endl;
 	signature = inputSignature();
 	lenght = inputLenght();
 	title = inputTitle();
@@ -24,24 +27,24 @@ Video::~Video() {
 }
 
 /**
- * Print the current object.
- */
-void Video::print() {
-	Medium::print();
-	std::cout << "  ";
-	std::cout << std::left << "Dauer " << std::setprecision(2) << std::fixed << lenght << " min";
-}
-
-/**
  * Input lenght and check validity.
  */
 double Video::inputLenght() {
 	double lenght = 0;
-	std::cout << "Spieldauer: ";
-	while( !(std::cin >> lenght) ) {
-		std::cin.clear();
-		std::cin.ignore( 999, '\n' );
-		std::cerr << "[ERROR] Keine gültige Filmlänge eingegeben!";
+	cin.clear();
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	cout << "  Spieldauer: ";
+	while( !(cin >> lenght) ) {
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cerr << "  [ERROR] Keine gültige Filmlänge eingegeben!";
 	}
 	return lenght;
+}
+
+string Video::getDetails() {
+	stringstream string;
+	string << "Spieldauer: " << fixed << setprecision(2) << getLenght() << " min.";
+
+	return string.str();
 }

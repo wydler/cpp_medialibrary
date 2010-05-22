@@ -9,7 +9,7 @@
 #include <iostream>
 #include <sstream>
 #include <string>
-#include <stdlib.h>
+#include <limits>
 
 #include "media/Medium.h"
 #include "media/Book.h"
@@ -31,6 +31,7 @@ int main() {
 
 	while( action != 'q' ) {
 		// input new action
+		cin.clear();
 		cout << endl;
 		cout << "Bitte Aktion eingeben: ";
 		cin >> action;
@@ -39,21 +40,28 @@ int main() {
 		switch( action ) {
 			// create medium
 			case 'm': {
-				lib->add( new Medium() );
+				bool flag = lib->add(new Medium());
+				if(flag == false) {
+					cerr << "  [ERROR] Medium konnte nicht erstellt werden!" << endl;
+				}
 				break;
 			}
 			// create book
-			/*
 			case 'b': {
-				lib->add( new Book() );
+				bool flag = lib->add(new Book());
+				if(flag == false) {
+					cerr << "  [ERROR] Buch konnte nicht erstellt werden!" << endl;
+				}
 				break;
 			}
 			// create video
 			case 'v': {
-				lib->add( new Video() );
+				bool flag = lib->add(new Video());
+				if(flag == false) {
+					cerr << "  [ERROR] Video konnte nicht erstellt werden!" << endl;
+				}
 				break;
 			}
-			*/
 			// print library-list
 			case 'l': {
 				ITEM* item = NULL;
@@ -73,10 +81,14 @@ int main() {
 				lib->begin();
 				while((item = lib->getItem()) != NULL) {
 					if(item->getSignature() == sig) {
-						lib->remove();
-						cout << "[INFO]  Datensatz gelöscht" << endl;
+						bool flag = lib->remove();
+						if(flag == true) {
+							cout << "  [INFO] Datensatz gelöscht" << endl;
+						} else {
+							cerr << "  [ERROR] Fehler beim löschen des Datensatz!" << endl;
+						}
 					} else {
-						cerr << "[ERROR] Signatur nicht gefunden!" << endl;
+						cerr << "  [ERROR] Signatur nicht gefunden!" << endl;
 					}
 					lib->next();
 				}
@@ -105,10 +117,8 @@ int main() {
 				}
 
 				if( flag == 0 ) {
-					std::cerr << "[ERROR] Signatur " << tmpSig << " existiert nicht!" << std::endl;
-					std::cerr.flush();
+					std::cerr << "  [ERROR] Signatur " << tmpSig << " existiert nicht!" << std::endl;
 				}
-				//lib->changeState( true );
 				break;
 			}
 			// return a medium
@@ -134,19 +144,16 @@ int main() {
 				}
 
 				if( flag == 0 ) {
-					std::cerr << "[ERROR] Signatur " << tmpSig << " existiert nicht!" << std::endl;
-					std::cerr.flush();
+					std::cerr << "  [ERROR] Signatur " << tmpSig << " existiert nicht!" << std::endl;
 				}
-
-				//lib->changeState( false );
 				break;
 			}
 			// show help
 			case 'h': {
 				cout << "Mögliche Befehle:" << endl;
 				cout << "m - Neues Medium anlegen" << endl;
-				//cout << "b - Neues Buch anlegen" << endl;
-				//cout << "v - Neues Video anlegen" << endl;
+				cout << "b - Neues Buch anlegen" << endl;
+				cout << "v - Neues Video anlegen" << endl;
 				cout << "l - Medienliste anzeigen" << endl;
 				cout << "d SIG - Medium mit der Signatur 'SIG' loeschen" << endl;
 				cout << "e SIG - Medium mit der Signatur 'SIG' ausleihen" << endl;
@@ -161,14 +168,14 @@ int main() {
 				//lib->deleteAll();
 				// then delete the library
 				delete lib;
-				cout << "[INFO]  Programm wurde beendet!" << endl;
+				cout << " [INFO] Programm wurde beendet!" << endl;
 				break;
 			}
 			// default switch
 			default: {
 				cin.clear();
-				cin.ignore( 999, '\n' );
-				cerr << "[ERROR] Keine gültige Aktion eingeben!" << endl;
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+				cerr << " [ERROR] Keine gültige Aktion eingeben!" << endl;
 				break;
 			}
 		}

@@ -17,7 +17,7 @@ public:
 	virtual ~Video();
 	double getLenght() { return lenght; };
 	void setLenght( double _lenght ) { lenght = _lenght; };
-	virtual void print();
+	std::string getDetails();
 private:
 	double inputLenght();
 	double lenght;
