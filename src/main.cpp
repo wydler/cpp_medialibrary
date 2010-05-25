@@ -16,6 +16,7 @@
 #include "media/Video.h"
 #include "array_library/Library.h"
 #include "dynamic_library/Container.h"
+#include "utilities/Notifier.h"
 
 using namespace std;
 
@@ -28,6 +29,8 @@ int main() {
 
 	// create dynamic library
 	Container* lib = new Container();
+
+	Notifier* notify = new Notifier();
 
 	while( action != 'q' ) {
 		// input new action
@@ -43,6 +46,8 @@ int main() {
 				bool flag = lib->add(new Medium());
 				if(flag == false) {
 					cerr << "  [ERROR] Medium konnte nicht erstellt werden!" << endl;
+				} else {
+					notify->success("Datensatz hinzugefügt");
 				}
 				break;
 			}
@@ -168,7 +173,9 @@ int main() {
 				//lib->deleteAll();
 				// then delete the library
 				delete lib;
+				delete notify;
 				cout << " [INFO] Programm wurde beendet!" << endl;
+				notify->info("Programm wurde beendet!");
 				break;
 			}
 			// default switch
