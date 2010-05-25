@@ -20,9 +20,12 @@ Container::~Container() {
 	// TODO Auto-generated destructor stub
 }
 
-bool Container::add( ITEM* newItem ) {
+bool Container::add(ITEM* newItem) {
 	C_Element* newE = new C_Element();
-	if(newE == NULL) { return false; };
+
+	if(newE == NULL) {
+		return false;
+	};
 
 	newE->item = newItem;
 	newE->previous = this->last;
@@ -40,7 +43,10 @@ bool Container::add( ITEM* newItem ) {
 
 bool Container::remove() {
 	C_Element* curE = this->current;
-	if(this->current == NULL) return false;
+
+	if(this->current == NULL) {
+		return false;
+	}
 
 	this->current = curE->previous;
 	if(this->current != NULL) {
