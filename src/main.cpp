@@ -10,6 +10,7 @@
 #include <sstream>
 #include <string>
 #include <limits>
+#include <fstream>
 
 #include "media/Medium.h"
 #include "media/Book.h"
@@ -153,6 +154,35 @@ int main() {
 				}
 				break;
 			}
+			case 'o': {
+				ofstream f ("test.dat", ios::out|ios::binary);
+
+				ITEM* item = NULL;
+				lib->begin();
+				while((item = lib->getItem()) != NULL) {
+					f.write((char*)&item, sizeof(item));
+					lib->next();
+				}
+
+				f.close();
+				break;
+			}
+			case 'i': {
+				ifstream f ("test.txt", ios::in|ios::binary);
+
+				ITEM* item = NULL;
+				while (!f.eof()) {
+					f.read((char*)&item, sizeof(item));
+					//lib->add(item);
+					if( f.bad() ) {
+						cerr << "Error reading data" << endl;
+					} else {
+						cout << item << endl;
+					}
+				}
+				f.close();
+				break;
+			}
 			// show help
 			case 'h': {
 				cout << "Mögliche Befehle:" << endl;
@@ -163,6 +193,8 @@ int main() {
 				cout << "d SIG - Medium mit der Signatur 'SIG' loeschen" << endl;
 				cout << "e SIG - Medium mit der Signatur 'SIG' ausleihen" << endl;
 				cout << "r SIG - Medium mit der Signatur 'SIG' zurückgeben" << endl;
+				cout << "s - Medienliste speichern" << endl;
+				cout << "a - Medienliste laden" << endl;
 				cout << "h - Hilfe anzeigen" << endl;
 				cout << "q - Programm beenden" << endl;
 				break;
