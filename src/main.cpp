@@ -155,32 +155,42 @@ int main() {
 				break;
 			}
 			case 'o': {
-				ofstream f ("test.dat", ios::out|ios::binary);
+				Medium one = NULL;
 
-				ITEM* item = NULL;
-				lib->begin();
-				while((item = lib->getItem()) != NULL) {
-					f.write((char*)&item, sizeof(item));
-					lib->next();
-				}
+				one.setSignature(123);
+				one.setState(false);
+				one.setTitle("fsdf");
+				one.setType("Medium");
 
-				f.close();
+				ofstream ofs("test.bin", ios::out | ios::binary);
+				ofs.write((char*)&one, sizeof(one));
+				ofs.close();
+
+				cout << "geschrieben" << endl;
+				cout.flush();
+
+				Medium* two = NULL;
+
+				ifstream ifs("test.bin", ios::in | ios::binary);
+				ifs.seekg(0);
+				ifs.read((char*)two, sizeof(two));
+
+				cout << two->getSignature() << endl;
+				cout << two->getTitle() << endl;
+
+				ifs.close();
 				break;
 			}
 			case 'i': {
-				ifstream f ("test.txt", ios::in|ios::binary);
+				Medium two = NULL;
 
-				ITEM* item = NULL;
-				while (!f.eof()) {
-					f.read((char*)&item, sizeof(item));
-					//lib->add(item);
-					if( f.bad() ) {
-						cerr << "Error reading data" << endl;
-					} else {
-						cout << item << endl;
-					}
-				}
-				f.close();
+				ifstream ifs("test.dat", ios::in | ios::binary);
+				ifs.read((char*)&two, sizeof(two));
+
+				cout << two.getSignature() << endl;
+				cout << two.getTitle() << endl;
+
+				ifs.close();
 				break;
 			}
 			// show help
