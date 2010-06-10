@@ -64,6 +64,8 @@ int main() {
 			}
 			// print library-list
 			case 'l': {
+				Medium::printHead();
+
 				ITEM* item = NULL;
 				lib->begin();
 				while((item = lib->getItem()) != NULL) {
@@ -82,6 +84,7 @@ int main() {
 				while((item = lib->getItem()) != NULL) {
 					if(item->getSignature() == sig) {
 						bool flag = lib->remove();
+						delete item;
 						if(flag == true) {
 							cout << "  [INFO] Datensatz gelöscht" << endl;
 						} else {
@@ -105,11 +108,10 @@ int main() {
 				lib->begin();
 				while((item = lib->getItem()) != NULL) {
 					if( item->getSignature() == tmpSig ) {
-						if( item->getState() == false ) {
-							item->setState(true);
-							std::cout << "  " << item->getType() << " " << item->getSignature() << " wurde als entliehen markiert." << std::endl;
-						} else {
-							std::cerr << "  " << item->getType() << " " << item->getSignature() << " ist schon als entliehen markiert." << std::endl;
+						try {
+							item->lendMedium();
+						} catch(StatusError e) {
+							cerr << e.message() << endl;
 						}
 						flag++;
 					}
@@ -132,11 +134,10 @@ int main() {
 				lib->begin();
 				while((item = lib->getItem()) != NULL) {
 					if( item->getSignature() == tmpSig ) {
-						if( item->getState() == true ) {
-							item->setState(false);
-							std::cout << "  " << item->getType() << " " << item->getSignature() << " wurde als vorhanden markiert." << std::endl;
-						} else {
-							std::cerr << "  " << item->getType() << " " << item->getSignature() << " ist schon als vorhanden markiert." << std::endl;
+						try {
+							item->returnMedium();
+						} catch(StatusError e) {
+							cerr << e.message() << endl;
 						}
 						flag++;
 					}
