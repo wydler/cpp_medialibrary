@@ -15,13 +15,12 @@
 
 typedef Medium ITEM;
 
-struct Element {
+class C_Element {
 	ITEM* item;
-	struct Element* previous;
-	struct Element* next;
+	struct C_Element* previous;
+	struct C_Element* next;
+	friend class Container;
 };
-
-typedef struct Element C_Element;
 
 class Container {
 	public:

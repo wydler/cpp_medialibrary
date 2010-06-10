@@ -56,7 +56,6 @@ bool Container::remove() {
 		this->last = curE->previous;
 	}
 
-	delete curE->item;
 	delete curE;
 
 	return true;
