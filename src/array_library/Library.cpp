@@ -75,7 +75,7 @@ void Library::changeState( bool state ) {
 
 	std::cin >> tmpSig;
 
-	for( unsigned int i = 0; i < (sizeof(mediumLib)/sizeof(mediumLib[0])); i++ ) {
+	/*for( unsigned int i = 0; i < (sizeof(mediumLib)/sizeof(mediumLib[0])); i++ ) {
 		if(mediumLib[i] != NULL) {
 			if( mediumLib[i]->getSignature() == tmpSig ) {
 				if( mediumLib[i]->getState() == !state ) {
@@ -95,7 +95,7 @@ void Library::changeState( bool state ) {
 				flag++;
 			}
 		}
-	}
+	}*/
 
 	if( flag == 0 ) {
 		std::cerr << "[ERROR] Signatur " << tmpSig << " existiert nicht!" << std::endl;
