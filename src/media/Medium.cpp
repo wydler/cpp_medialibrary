@@ -13,12 +13,22 @@
 
 using namespace std;
 
+StatusError::StatusError(string _title) {
+	title = _title;
+}
+
+string StatusError::message() {
+	ostringstream os;
+	os << "  Fehler bei der Statusaenderung von \"" << title << "\".";
+	return os.str();
+}
+
 Medium::Medium() {
 	cout << "  Bitte Mediumdaten eingeben: Signatur und Titel" << std::endl;
 	signature = inputSignature();
 	title = inputTitle();
 	type = "Medium";
-	state = false;
+	state = praesent;
 }
 
 Medium::~Medium() {
@@ -29,7 +39,7 @@ Medium::~Medium() {
  * Convert the state from boolean into text.
  */
 std::string Medium::printState() {
-	if( state == false ) {
+	if( state == praesent ) {
 		return "vorh.";
 	} else {
 		return "entl.";
@@ -39,11 +49,11 @@ std::string Medium::printState() {
 std::ostream &operator<<(std::ostream &ostr, Medium* item)
 {
 	return ostr << " "
-			<< setw(6) << right << item->getSignature() << " "
-			<< setw(10) << left << item->getType() << " "
-			<< setw(10) << left << item->getTitle().substr(0, 10) << " "
-			<< setw(5) << left << item->printState() << " "
-			<< item->getDetails() << " "
+			<< setw(8) << right << item->getSignature() << "   "
+			<< setw(6) << left << item->getType() << "   "
+			<< setw(20) << left << item->getTitle().substr(0, 20) << "   "
+			<< setw(6) << left << item->printState() << "   "
+			<< item->getDetails()
 			<< endl;
 }
 
@@ -71,4 +81,33 @@ int Medium::inputSignature() {
 		cerr << "  [ERROR] Keine gültige Signatur eingegeben!";
 	}
 	return sig;
+}
+
+void Medium::printHead() {
+	cout << " "
+	<< setw(8) << right << "Signatur" << "   "
+	<< setw(6) << left << "Typ" << "   "
+	<< setw(20) << left << "Titel" << "   "
+	<< setw(6) << left << "Status" << "   "
+	<< "weitere Daten "
+	<< endl;
+}
+
+void Medium::lendMedium() {
+	if( state == praesent ) {
+		state = entliehen;
+		std::cout << "  " << type << " " << signature << " wurde als entliehen markiert." << std::endl;
+	} else {
+		throw StatusError(title);
+		/*std::cerr << "  " << type << " " << signature << " ist schon als entliehen markiert." << std::endl; */
+	}
+}
+
+void Medium::returnMedium() {
+	if( state == entliehen ) {
+		state = praesent;
+		std::cout << "  " << type << " " << signature << " wurde als vorhanden markiert." << std::endl;
+	} else {
+		throw StatusError(title);
+	}
 }

@@ -19,7 +19,7 @@ Book::Book() : Medium(0) {
 	pages = inputPages();
 	title = inputTitle();
 	type = "Book";
-	state = false;
+	state = praesent;
 }
 
 Book::~Book() {

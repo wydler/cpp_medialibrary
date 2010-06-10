@@ -19,7 +19,7 @@ Video::Video() : Medium(0) {
 	lenght = inputLenght();
 	title = inputTitle();
 	type = "Video";
-	state = false;
+	state = praesent;
 }
 
 Video::~Video() {
