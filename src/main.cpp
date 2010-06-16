@@ -166,7 +166,12 @@ int main() {
 			// exit program
 			case 'q': {
 				// first delete the objects in the library
-				//lib->deleteAll();
+				ITEM* item = NULL;
+				lib->begin();
+				while((item = lib->getItem()) != NULL) {
+					delete item;
+					lib->next();
+				}
 				// then delete the library
 				delete lib;
 				cout << " [INFO] Programm wurde beendet!" << endl;
