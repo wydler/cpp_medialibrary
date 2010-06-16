@@ -19,7 +19,7 @@ StatusError::StatusError(string _title) {
 
 string StatusError::message() {
 	ostringstream os;
-	os << "  Fehler bei der Statusaenderung von \"" << title << "\".";
+	os << "  Fehler beim Leihen/Rueckgeben von \'" << title << "\'.";
 	return os.str();
 }
 
@@ -99,7 +99,6 @@ void Medium::lendMedium() {
 		std::cout << "  " << type << " " << signature << " wurde als entliehen markiert." << std::endl;
 	} else {
 		throw StatusError(title);
-		/*std::cerr << "  " << type << " " << signature << " ist schon als entliehen markiert." << std::endl; */
 	}
 }
 
