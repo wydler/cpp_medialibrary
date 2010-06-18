@@ -20,6 +20,9 @@ Container::~Container() {
 	// TODO Auto-generated destructor stub
 }
 
+/**
+ * Add new element to library
+ */
 bool Container::add( ITEM* newItem ) {
 	C_Element* newE = new C_Element();
 	if(newE == NULL) { return false; };
@@ -38,6 +41,9 @@ bool Container::add( ITEM* newItem ) {
 	return true;
 }
 
+/**
+ * Remove element from library
+ */
 bool Container::remove() {
 	C_Element* curE = this->current;
 	if(this->current == NULL) return false;
@@ -61,16 +67,25 @@ bool Container::remove() {
 	return true;
 }
 
+/**
+ * Set first element as current element
+ */
 void Container::begin() {
 	this->current = this->first;
 }
 
+/**
+ * Get the next element
+ */
 void Container::next() {
 	if(this->current != NULL) {
 		this->current = this->current->next;
 	}
 }
 
+/**
+ * Return the current element
+ */
 ITEM* Container::getItem() {
 	if(this->current != NULL) {
 		return this->current->item;
