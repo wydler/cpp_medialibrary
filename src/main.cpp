@@ -169,6 +169,7 @@ int main() {
 				ITEM* item = NULL;
 				lib->begin();
 				while((item = lib->getItem()) != NULL) {
+					lib->remove();
 					delete item;
 					lib->next();
 				}
