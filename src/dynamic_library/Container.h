@@ -17,8 +17,8 @@ typedef Medium ITEM;
 
 class C_Element {
 	ITEM* item;
-	struct C_Element* previous;
-	struct C_Element* next;
+	C_Element* previous;
+	C_Element* next;
 	friend class Container;
 };
 
