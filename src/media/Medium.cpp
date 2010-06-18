@@ -13,10 +13,16 @@
 
 using namespace std;
 
+/**
+ * Error-Class
+ */
 StatusError::StatusError(string _title) {
 	title = _title;
 }
 
+/**
+ * Return error-text
+ */
 string StatusError::message() {
 	ostringstream os;
 	os << "  Fehler beim Leihen/Rueckgeben von \'" << title << "\'.";
@@ -46,6 +52,9 @@ std::string Medium::printState() {
 	}
 }
 
+/**
+ * Print item with operator-overloading
+ */
 std::ostream &operator<<(std::ostream &ostr, Medium* item)
 {
 	return ostr << " "
@@ -83,6 +92,9 @@ int Medium::inputSignature() {
 	return sig;
 }
 
+/**
+ * Print table head
+ */
 void Medium::printHead() {
 	cout << " "
 	<< setw(8) << right << "Signatur" << "   "
@@ -93,6 +105,9 @@ void Medium::printHead() {
 	<< endl;
 }
 
+/**
+ * Borrow medium from library
+ */
 void Medium::lendMedium() {
 	if( state == praesent ) {
 		state = entliehen;
@@ -102,6 +117,9 @@ void Medium::lendMedium() {
 	}
 }
 
+/**
+ * Return medium to library
+ */
 void Medium::returnMedium() {
 	if( state == entliehen ) {
 		state = praesent;
